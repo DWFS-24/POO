@@ -1,43 +1,31 @@
 console.log('hola mundo')
 
-// Definimos Clase Animal
-class Animal {
-  constructor(nombre, edad) {
-    this.nombre = nombre;
-    this.edad = edad;
+class Producto {
+
+  constructor(nombre, precio, stock) {
+    this.nombre = nombre
+    this.precio = precio
+    this.stock = stock
   }
 
-  comer() {
-    console.log(`${this.nombre} está comiendo.`)
-  }
-  
-  dormir() {
-    console.log(`${this.nombre} está durmiendo.`)
-  }
-}
-// Definicion de clase Perro que hereda de Animal 
-class Perro extends Animal {
-  constructor (nombre, edad, raza) {
-    super(nombre, edad)
-    this.raza = raza
-  }
-
-  ladrar() {
-    console.log(`${this.nombre} (${this.raza}) está ladrando: ¡Guau, guau!`);
+  vender(cantidad) {
+    if( cantidad > 0 && cantidad <= this.stock ) {
+      this.stock -= cantidad;
+      console.log(`Se ha vendido ${cantidad} unidades de ${this.nombre}. Stock restante: ${this.stock}`);
+    } else if( cantidad <= 0) {
+      console.log('La cantidad a vender debe ser mayor que cero.');
+    } else {
+      console.log('No hay suficientes productos en stock para realizar la venta.');
+    }
   }
 }
 
-//Crear instancias de clase
+const producto1 = new Producto('Laptop', 1500.50, 10)
+const producto2 = new Producto('Caguama corona', 45, 20)
 
-const animalGenerico = new Animal('Criatura', 5);
-const miPerro = new Perro('buddy', 3, 'Labrador');
+producto1.vender(0)
+producto2.vender(15)
+producto1.vender(5)
 
+producto1.vender(8)
 
-console.log(animalGenerico)
-
-animalGenerico.comer()
-animalGenerico.dormir()
-
-miPerro.comer() // hereda de animal
-miPerro.dormir() // hereda de animal
-miPerro.ladrar() // metodo propio
